@@ -1,0 +1,34 @@
+﻿@using SimonGilbert.Blog.Images
+@model IEnumerable<UploadedImage>
+@{
+    ViewData["Title"] = "Azure Cloud Hosted Images";
+}
+
+<div class="row">
+    <div class="col-md-6 col-12 mx-auto">
+        <h2 class="text-center">@Model.Count() @ViewBag.Title</h2>
+    </div>
+    <div class="col-12">
+        <div class="container">
+            <div class="row mt-4 justify-content-center">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var image in Model)
+                    {
+                        <div class="col-md-3 col-sm-12 col-12">
+                            <div class="card card-pricing card-plain">
+                                <div class="card-body">
+                                    <img src="@image.Url" alt="Azure Cloud Hosted Image" title="Azure Cloud Hosted Image" class="card-img-top">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-danger">No images uploaded to the Microsoft Azure Cloud yet...</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

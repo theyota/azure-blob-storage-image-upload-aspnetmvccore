@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <PackageReference Include="Autofac" Version="4.9.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <Content Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimonGilbert.Blog.Images\SimonGilbert.Blog.Images.csproj" />
+  </ItemGroup>
+</Project>

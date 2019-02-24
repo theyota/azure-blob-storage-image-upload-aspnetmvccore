@@ -1,0 +1,93 @@
+﻿@using SimonGilbert.Blog.Images
+@model ImageUploadViewModel
+@{
+    ViewBag.Title = "Upload Images";
+}
+
+<style type="text/css">
+    .btn-file-display {
+        display: none;
+    }
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-4 col-12 mx-auto">
+        <h2 class="text-center">@ViewBag.Title</h2>
+        <p class="text-center">Select multiple images,<br />to upload more than one image at once</p>
+        <div class="card card-pricing card-raised">
+            <div class="card-body">
+                @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="btn btn-block btn-outline-primary">
+                                Browse...
+                                @Html.TextBoxFor(model => model.Images, "", new { @class = "btn-file-display", @type = "file", @multiple = "multiple" })
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                            <p id="selectedImageFiles" class="text-success text-center"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-success btn-lg btn-block">Upload</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-info">@ViewBag.UploadStatus</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).on('change', ':file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $(':file').on('fileselect', function (event, numFiles, label) {
+                if (numFiles == 1) {
+                    $('#selectedImageFiles').text(numFiles + " image chosen for upload");
+                }
+                else {
+                    $('#selectedImageFiles').text(numFiles + " images chosen for upload");
+                }
+                console.log(numFiles);
+                console.log(label);
+            });
+        });
+    </script>
+}
