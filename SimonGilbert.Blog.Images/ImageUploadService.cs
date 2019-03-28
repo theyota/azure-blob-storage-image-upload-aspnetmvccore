@@ -5,23 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using Microsoft.WindowsAzure.Storage.Table;
-using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace SimonGilbert.Blog.Images
 {
     public class ImageUploadService : IImageUploadService
     {
-        private readonly IConfiguration _configuration;
         private readonly IImageUploadRepository _repository;
         private readonly CloudBlobContainer _cloudBlobContainer;
 
         public ImageUploadService(
-            IConfiguration configuration, 
             IImageUploadRepository repository,
             CloudBlobContainer cloudBlobContainer)
         {
-            this._configuration = configuration;
             this._repository = repository;
             this._cloudBlobContainer = cloudBlobContainer;
         }
